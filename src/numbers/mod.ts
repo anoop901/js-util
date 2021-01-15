@@ -6,6 +6,6 @@
  * @param dividend
  * @param divisor
  */
-export function mod(dividend: number, divisor: number): number {
+export default function mod(dividend: number, divisor: number): number {
   return ((dividend % divisor) + divisor) % divisor;
 }

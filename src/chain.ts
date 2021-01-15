@@ -8,6 +8,6 @@ class Chain<T> {
   }
 }
 
-export function chain<T>(initialValue: T): Chain<T> {
+export default function chain<T>(initialValue: T): Chain<T> {
   return new Chain(initialValue);
 }

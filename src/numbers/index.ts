@@ -1,1 +1,1 @@
-export * from "./numbers";
+export { default as mod } from "./mod";
