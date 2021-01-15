@@ -2,10 +2,11 @@
   "name": "@anoop901/js-util",
   "version": "1.0.0",
   "description": "Convenience utilities for writing JS code.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsc",
+    "postbuild": "cp package.json dist",
     "test": "mocha"
   },
   "repository": {
