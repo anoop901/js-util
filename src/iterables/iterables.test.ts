@@ -1,4 +1,4 @@
-import chain from "../chain/chain";
+import { chain } from "../chain/chain";
 import {
   allIntegersStartingAt,
   allMatch,
