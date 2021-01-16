@@ -32,6 +32,7 @@ jobs:
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
       - name: Get package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
