@@ -30,6 +30,8 @@ jobs:
   documentation:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Get package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
