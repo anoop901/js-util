@@ -1,7 +1,7 @@
 name: Release
 on:
-  push:
-    branches: [main]
+  release:
+    type: [published]
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -17,6 +17,8 @@ jobs:
         run: npm install
       - name: Run tests
         run: npm test
+      - name: Edit package version
+        run: npx npe version $GITHUB_REF
       - name: Build package
         run: |
           npm run build
@@ -26,14 +28,10 @@ jobs:
         working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  documentation:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install dependencies
-        run: npm install
+      - name: Push new package version
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Get package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
