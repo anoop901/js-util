@@ -26,3 +26,19 @@ jobs:
         working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - name: Generate documentation
+        run: npm run docs
+      - name: Publish documentation
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs
+          TARGET_FOLDER: /${{ steps.package-version.outputs.current-version }}
