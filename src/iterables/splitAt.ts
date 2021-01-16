@@ -8,7 +8,6 @@ export default function splitAt<T>(splitIndex: number) {
     const before: Iterator<T> = {
       next(): IteratorResult<T> {
         if (currentIndexBefore < splitIndex) {
-          // TODO get from buffer if present
           currentIndexBefore++;
           if (beforeBuffer !== null) {
             const value = beforeBuffer.shift();
