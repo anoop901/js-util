@@ -1,12 +1,19 @@
-import { assertEquals, assertThrows } from "../deps.ts";
+import { Rhum, assertThrows } from "../deps.ts";
 import max from "./max.ts";
 
-Deno.test("basic", () => {
-  assertEquals(max([3, 1, 5, 8, 3]), 8);
+Rhum.testPlan("max.test.ts", () => {
+  Rhum.testSuite("max", () => {
+    Rhum.testCase("basic", () => {
+      Rhum.asserts.assertEquals(max([3, 1, 5, 8, 3]), 8);
+    });
+    Rhum.testCase("one element", () => {
+      Rhum.asserts.assertEquals(max([5]), 5);
+    });
+    Rhum.testCase("empty causes error", () => {
+      Rhum.asserts.assertThrows(() => max([]));
+    });
+  });
 });
-Deno.test("one element", () => {
-  assertEquals(max([5]), 5);
-});
-Deno.test("empty causes error", () => {
-  assertThrows(() => max([]));
-});
+
+Rhum.run()
+

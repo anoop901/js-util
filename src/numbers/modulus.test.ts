@@ -1,27 +1,34 @@
-import { assertEquals } from "../deps.ts";
+import { Rhum } from "../deps.ts";
 import modulus from "./modulus.ts";
 
-Deno.test("positive dividend, positive divisor", () => {
-  assertEquals(modulus(12, 5), 2);
+Rhum.testPlan("modulus.test.ts", () => {
+  Rhum.testSuite("modulus", () => {
+    Rhum.testCase("positive dividend, positive divisor", () => {
+      Rhum.asserts.assertEquals(modulus(12, 5), 2);
+    });
+    Rhum.testCase("negative dividend, positive divisor", () => {
+      Rhum.asserts.assertEquals(modulus(-12, 5), 3);
+    });
+    Rhum.testCase("positive dividend, negative divisor", () => {
+      Rhum.asserts.assertEquals(modulus(12, -5), -3);
+    });
+    Rhum.testCase("negative dividend, negative divisor", () => {
+      Rhum.asserts.assertEquals(modulus(-12, -5), -2);
+    });
+    Rhum.testCase("positive dividend, positive divisor, evenly divisible", () => {
+      Rhum.asserts.assertEquals(modulus(15, 5), 0);
+    });
+    Rhum.testCase("negative dividend, positive divisor, evenly divisible", () => {
+      Rhum.asserts.assertEquals(modulus(-15, 5), 0);
+    });
+    Rhum.testCase("positive dividend, negative divisor, evenly divisible", () => {
+      Rhum.asserts.assertEquals(modulus(15, -5), -0);
+    });
+    Rhum.testCase("negative dividend, negative divisor, evenly divisible", () => {
+      Rhum.asserts.assertEquals(modulus(-15, -5), -0);
+    });
+  });
 });
-Deno.test("negative dividend, positive divisor", () => {
-  assertEquals(modulus(-12, 5), 3);
-});
-Deno.test("positive dividend, negative divisor", () => {
-  assertEquals(modulus(12, -5), -3);
-});
-Deno.test("negative dividend, negative divisor", () => {
-  assertEquals(modulus(-12, -5), -2);
-});
-Deno.test("positive dividend, positive divisor, evenly divisible", () => {
-  assertEquals(modulus(15, 5), 0);
-});
-Deno.test("negative dividend, positive divisor, evenly divisible", () => {
-  assertEquals(modulus(-15, 5), 0);
-});
-Deno.test("positive dividend, negative divisor, evenly divisible", () => {
-  assertEquals(modulus(15, -5), -0);
-});
-Deno.test("negative dividend, negative divisor, evenly divisible", () => {
-  assertEquals(modulus(-15, -5), -0);
-});
+
+Rhum.run()
+

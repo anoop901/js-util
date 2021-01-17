@@ -1,12 +1,19 @@
-import { assertEquals, assertThrows } from "../deps.ts";
+import { Rhum, assertThrows } from "../deps.ts";
 import min from "./min.ts";
 
-Deno.test("basic", () => {
-  assertEquals(min([3, 1, 5, 8, 3]), 1);
+Rhum.testPlan("min.test.ts", () => {
+  Rhum.testSuite("min", () => {
+    Rhum.testCase("basic", () => {
+      Rhum.asserts.assertEquals(min([3, 1, 5, 8, 3]), 1);
+    });
+    Rhum.testCase("one element", () => {
+      Rhum.asserts.assertEquals(min([5]), 5);
+    });
+    Rhum.testCase("empty causes error", () => {
+      Rhum.asserts.assertThrows(() => min([]));
+    });
+  });
 });
-Deno.test("one element", () => {
-  assertEquals(min([5]), 5);
-});
-Deno.test("empty causes error", () => {
-  assertThrows(() => min([]));
-});
+
+Rhum.run()
+

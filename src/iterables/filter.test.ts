@@ -1,15 +1,22 @@
-import { assertEquals } from "../deps.ts";
+import { Rhum } from "../deps.ts";
 import filter from "./filter.ts";
 
-Deno.test("basic", () => {
-  const iter = filter((x: number) => x % 10 === 0)([6, 11, 50, 28, 80]);
-  assertEquals(Array.from(iter), [50, 80]);
+Rhum.testPlan("filter.test.ts", () => {
+  Rhum.testSuite("filter", () => {
+    Rhum.testCase("basic", () => {
+      const iter = filter((x: number) => x % 10 === 0)([6, 11, 50, 28, 80]);
+      Rhum.asserts.assertEquals(Array.from(iter), [50, 80]);
+    });
+    Rhum.testCase("all match", () => {
+      const iter = filter((x: number) => x % 10 === 0)([50, 80, 70]);
+      Rhum.asserts.assertEquals(Array.from(iter), [50, 80, 70]);
+    });
+    Rhum.testCase("none match", () => {
+      const iter = filter((x: number) => x % 10 === 0)([6, 11, 28]);
+      Rhum.asserts.assertEquals(Array.from(iter), []);
+    });
+  });
 });
-Deno.test("all match", () => {
-  const iter = filter((x: number) => x % 10 === 0)([50, 80, 70]);
-  assertEquals(Array.from(iter), [50, 80, 70]);
-});
-Deno.test("none match", () => {
-  const iter = filter((x: number) => x % 10 === 0)([6, 11, 28]);
-  assertEquals(Array.from(iter), []);
-});
+
+Rhum.run()
+

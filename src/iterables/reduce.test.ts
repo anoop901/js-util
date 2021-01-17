@@ -1,15 +1,22 @@
-import { assertEquals, assertThrows } from "../deps.ts";
+import { Rhum, assertThrows } from "../deps.ts";
 import reduce from "./reduce.ts";
 
-Deno.test("basic", () => {
-  assertEquals(
-    reduce((a, b) => a + ":" + b)(["the", "quick", "brown", "fox"]),
-    "the:quick:brown:fox"
-  );
+Rhum.testPlan("reduce.test.ts", () => {
+  Rhum.testSuite("reduce", () => {
+    Rhum.testCase("basic", () => {
+      Rhum.asserts.assertEquals(
+        reduce((a, b) => a + ":" + b)(["the", "quick", "brown", "fox"]),
+        "the:quick:brown:fox"
+      );
+    });
+    Rhum.testCase("one element", () => {
+      Rhum.asserts.assertEquals(reduce((a, b) => a + ":" + b)(["fox"]), "fox");
+    });
+    Rhum.testCase("empty causes error", () => {
+      Rhum.asserts.assertThrows(() => reduce((a, b) => a + ":" + b)([]));
+    });
+  });
 });
-Deno.test("one element", () => {
-  assertEquals(reduce((a, b) => a + ":" + b)(["fox"]), "fox");
-});
-Deno.test("empty causes error", () => {
-  assertThrows(() => reduce((a, b) => a + ":" + b)([]));
-});
+
+Rhum.run()
+

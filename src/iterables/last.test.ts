@@ -1,12 +1,19 @@
-import { assertEquals } from "../deps.ts";
+import { Rhum } from "../deps.ts";
 import last from "./last.ts";
 
-Deno.test("basic", () => {
-  assertEquals(last([11, 12, 13]), 13);
+Rhum.testPlan("last.test.ts", () => {
+  Rhum.testSuite("last", () => {
+    Rhum.testCase("basic", () => {
+      Rhum.asserts.assertEquals(last([11, 12, 13]), 13);
+    });
+    Rhum.testCase("single element", () => {
+      Rhum.asserts.assertEquals(last([11]), 11);
+    });
+    Rhum.testCase("empty", () => {
+      Rhum.asserts.assertEquals(last([]), null);
+    });
+  });
 });
-Deno.test("single element", () => {
-  assertEquals(last([11]), 11);
-});
-Deno.test("empty", () => {
-  assertEquals(last([]), null);
-});
+
+Rhum.run()
+

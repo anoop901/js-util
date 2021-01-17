@@ -1,6 +1,13 @@
-import { assertThrows } from "../deps.ts";
+import { Rhum } from "../deps.ts";
 import throwError from "./throwError.ts";
 
-Deno.test("throws error", () => {
-  assertThrows(() => throwError("foo"), Error, "foo");
+Rhum.testPlan("throwError.test.ts", () => {
+  Rhum.testSuite("throwError", () => {
+    Rhum.testCase("throws error", () => {
+      Rhum.asserts.assertThrows(() => throwError("foo"), Error, "foo");
+    });
+  });
 });
+
+Rhum.run()
+

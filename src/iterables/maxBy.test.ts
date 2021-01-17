@@ -1,25 +1,32 @@
-import { assertEquals, assertThrows } from "../deps.ts";
+import { Rhum, assertThrows } from "../deps.ts";
 import maxBy from "./maxBy.ts";
 
-Deno.test("basic", () => {
-  assertEquals(
-    maxBy((x: string) => x.length)([
-      "the",
-      "quick",
-      "brown",
-      "fox",
-      "jumps",
-      "over",
-      "an",
-      "amazing",
-      "dog",
-    ]),
-    "amazing"
-  );
+Rhum.testPlan("maxBy.test.ts", () => {
+  Rhum.testSuite("maxBy", () => {
+    Rhum.testCase("basic", () => {
+      Rhum.asserts.assertEquals(
+        maxBy((x: string) => x.length)([
+          "the",
+          "quick",
+          "brown",
+          "fox",
+          "jumps",
+          "over",
+          "an",
+          "amazing",
+          "dog",
+        ]),
+        "amazing"
+      );
+    });
+    Rhum.testCase("one element", () => {
+      Rhum.asserts.assertEquals(maxBy((x: string) => x.length)(["fox"]), "fox");
+    });
+    Rhum.testCase("empty causes error", () => {
+      Rhum.asserts.assertThrows(() => maxBy((x: string) => x.length)([]));
+    });
+  });
 });
-Deno.test("one element", () => {
-  assertEquals(maxBy((x: string) => x.length)(["fox"]), "fox");
-});
-Deno.test("empty causes error", () => {
-  assertThrows(() => maxBy((x: string) => x.length)([]));
-});
+
+Rhum.run()
+

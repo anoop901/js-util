@@ -1,25 +1,32 @@
-import { assertEquals, assertThrows } from "../deps.ts";
+import { Rhum, assertThrows } from "../deps.ts";
 import minBy from "./minBy.ts";
 
-Deno.test("basic", () => {
-  assertEquals(
-    minBy((x: string) => x.length)([
-      "the",
-      "quick",
-      "brown",
-      "fox",
-      "jumps",
-      "over",
-      "an",
-      "amazing",
-      "dog",
-    ]),
-    "an"
-  );
+Rhum.testPlan("minBy.test.ts", () => {
+  Rhum.testSuite("minBy", () => {
+    Rhum.testCase("basic", () => {
+      Rhum.asserts.assertEquals(
+        minBy((x: string) => x.length)([
+          "the",
+          "quick",
+          "brown",
+          "fox",
+          "jumps",
+          "over",
+          "an",
+          "amazing",
+          "dog",
+        ]),
+        "an"
+      );
+    });
+    Rhum.testCase("one element", () => {
+      Rhum.asserts.assertEquals(minBy((x: string) => x.length)(["fox"]), "fox");
+    });
+    Rhum.testCase("empty causes error", () => {
+      Rhum.asserts.assertThrows(() => minBy((x: string) => x.length)([]));
+    });
+  });
 });
-Deno.test("one element", () => {
-  assertEquals(minBy((x: string) => x.length)(["fox"]), "fox");
-});
-Deno.test("empty causes error", () => {
-  assertThrows(() => minBy((x: string) => x.length)([]));
-});
+
+Rhum.run()
+

@@ -1,6 +1,13 @@
-import { assertEquals } from "../deps.ts";
+import { Rhum } from "../deps.ts";
 import sum from "./sum.ts";
 
-Deno.test("basic", () => {
-  assertEquals(sum([5, 2, 9]), 16);
+Rhum.testPlan("sum.test.ts", () => {
+  Rhum.testSuite("sum", () => {
+    Rhum.testCase("basic", () => {
+      Rhum.asserts.assertEquals(sum([5, 2, 9]), 16);
+    });
+  });
 });
+
+Rhum.run()
+
