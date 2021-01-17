@@ -1,6 +1,6 @@
-import { chain } from "..";
-import fold from "./fold";
-import map from "./map";
+import chain from "../chain.ts";
+import fold from "./fold.ts";
+import map from "./map.ts";
 
 export default function anyMatch<T>(pred: (t: T) => boolean) {
   return (iterable: Iterable<T>): boolean => {

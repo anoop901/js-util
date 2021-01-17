@@ -1,4 +1,4 @@
-import reduce from "./reduce";
+import reduce from "./reduce.ts";
 
 export default function minBy<T, U>(
   fn: (arg: T) => U

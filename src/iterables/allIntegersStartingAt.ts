@@ -1,5 +1,5 @@
-import chain from "../chain";
-import repeatedlyApply from "./repeatedlyApply";
+import chain from "../chain.ts";
+import repeatedlyApply from "./repeatedlyApply.ts";
 
 export default function allIntegersStartingAt(start = 0): Generator<number> {
   return chain(start)

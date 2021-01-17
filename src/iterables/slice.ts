@@ -1,6 +1,6 @@
-import chain from "../chain";
-import drop from "./drop";
-import take from "./take";
+import chain from "../chain.ts";
+import drop from "./drop.ts";
+import take from "./take.ts";
 
 export default function slice<T>(start: number, end: number) {
   return (iterable: Iterable<T>): Iterable<T> =>

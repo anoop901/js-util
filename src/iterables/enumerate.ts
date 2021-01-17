@@ -1,7 +1,7 @@
-import chain from "../chain";
-import zip from "./zip";
-import map from "./map";
-import allIntegersStartingAt from "./allIntegersStartingAt";
+import chain from "../chain.ts";
+import zip from "./zip.ts";
+import map from "./map.ts";
+import allIntegersStartingAt from "./allIntegersStartingAt.ts";
 
 export default function enumerate<T>(
   iterable: Iterable<T>

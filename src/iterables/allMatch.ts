@@ -1,6 +1,6 @@
-import chain from "../chain";
-import fold from "./fold";
-import map from "./map";
+import chain from "../chain.ts";
+import fold from "./fold.ts";
+import map from "./map.ts";
 
 /**
  * Creates a function that checks if all values match a condition.
