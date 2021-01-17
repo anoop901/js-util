@@ -1,30 +1,27 @@
-import { expect } from "chai";
-import pairs from "./pairs";
+import { assertEquals } from "../deps.ts";
+import pairs from "./pairs.ts";
 
-describe("pairs", () => {
-  it("basic", () => {
-    expect(
-      Array.from(pairs()(["the", "quick", "brown", "fox", "jumps"]))
-    ).to.deep.equal([
-      { first: "the", second: "quick" },
-      { first: "quick", second: "brown" },
-      { first: "brown", second: "fox" },
-      { first: "fox", second: "jumps" },
-    ]);
-  });
-  it("offset 2", () => {
-    expect(
-      Array.from(pairs(2)(["the", "quick", "brown", "fox", "jumps"]))
-    ).to.deep.equal([
+Deno.test("basic", () => {
+  assertEquals(Array.from(pairs()(["the", "quick", "brown", "fox", "jumps"])), [
+    { first: "the", second: "quick" },
+    { first: "quick", second: "brown" },
+    { first: "brown", second: "fox" },
+    { first: "fox", second: "jumps" },
+  ]);
+});
+Deno.test("offset 2", () => {
+  assertEquals(
+    Array.from(pairs(2)(["the", "quick", "brown", "fox", "jumps"])),
+    [
       { first: "the", second: "brown" },
       { first: "quick", second: "fox" },
       { first: "brown", second: "jumps" },
-    ]);
-  });
-  it("empty iterable", () => {
-    expect(Array.from(pairs()([]))).to.deep.equal([]);
-  });
-  it("one item in iterable", () => {
-    expect(Array.from(pairs()(["one"]))).to.deep.equal([]);
-  });
+    ]
+  );
+});
+Deno.test("empty iterable", () => {
+  assertEquals(Array.from(pairs()([])), []);
+});
+Deno.test("one item in iterable", () => {
+  assertEquals(Array.from(pairs()(["one"])), []);
 });

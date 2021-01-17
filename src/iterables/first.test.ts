@@ -1,14 +1,12 @@
-import { expect } from "chai";
-import first from "./first";
+import { assertEquals } from "../deps.ts";
+import first from "./first.ts";
 
-describe("first", () => {
-  it("basic", () => {
-    expect(first([11, 12, 13])).to.equal(11);
-  });
-  it("single element", () => {
-    expect(first([11])).to.equal(11);
-  });
-  it("empty", () => {
-    expect(first([])).to.equal(null);
-  });
+Deno.test("basic", () => {
+  assertEquals(first([11, 12, 13]), 11);
+});
+Deno.test("single element", () => {
+  assertEquals(first([11]), 11);
+});
+Deno.test("empty", () => {
+  assertEquals(first([]), null);
 });

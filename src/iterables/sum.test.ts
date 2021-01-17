@@ -1,8 +1,6 @@
-import { expect } from "chai";
-import sum from "./sum";
+import { assertEquals } from "../deps.ts";
+import sum from "./sum.ts";
 
-describe("sum", () => {
-  it("basic", () => {
-    expect(sum([5, 2, 9])).to.equal(16);
-  });
+Deno.test("basic", () => {
+  assertEquals(sum([5, 2, 9]), 16);
 });

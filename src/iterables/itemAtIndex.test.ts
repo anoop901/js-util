@@ -1,25 +1,27 @@
-import { expect } from "chai";
-import itemAtIndex from "./itemAtIndex";
+import { assertEquals } from "../deps.ts";
+import itemAtIndex from "./itemAtIndex.ts";
 
-describe("itemAtIndex", () => {
-  it("basic", () => {
-    expect(
-      itemAtIndex(2)(["the", "quick", "brown", "fox", "jumps", "over"])
-    ).to.equal("brown");
-  });
-  it("index 0", () => {
-    expect(
-      itemAtIndex(0)(["the", "quick", "brown", "fox", "jumps", "over"])
-    ).to.equal("the");
-  });
-  it("last index", () => {
-    expect(
-      itemAtIndex(5)(["the", "quick", "brown", "fox", "jumps", "over"])
-    ).to.equal("over");
-  });
-  it("out of bounds", () => {
-    expect(
-      itemAtIndex(8)(["the", "quick", "brown", "fox", "jumps", "over"])
-    ).to.equal(null);
-  });
+Deno.test("basic", () => {
+  assertEquals(
+    itemAtIndex(2)(["the", "quick", "brown", "fox", "jumps", "over"]),
+    "brown"
+  );
+});
+Deno.test("index 0", () => {
+  assertEquals(
+    itemAtIndex(0)(["the", "quick", "brown", "fox", "jumps", "over"]),
+    "the"
+  );
+});
+Deno.test("last index", () => {
+  assertEquals(
+    itemAtIndex(5)(["the", "quick", "brown", "fox", "jumps", "over"]),
+    "over"
+  );
+});
+Deno.test("out of bounds", () => {
+  assertEquals(
+    itemAtIndex(8)(["the", "quick", "brown", "fox", "jumps", "over"]),
+    null
+  );
 });

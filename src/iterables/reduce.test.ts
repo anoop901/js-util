@@ -1,16 +1,15 @@
-import { expect } from "chai";
-import reduce from "./reduce";
+import { assertEquals, assertThrows } from "../deps.ts";
+import reduce from "./reduce.ts";
 
-describe("reduce", () => {
-  it("basic", () => {
-    expect(
-      reduce((a, b) => a + ":" + b)(["the", "quick", "brown", "fox"])
-    ).to.equal("the:quick:brown:fox");
-  });
-  it("one element", () => {
-    expect(reduce((a, b) => a + ":" + b)(["fox"])).to.equal("fox");
-  });
-  it("empty causes error", () => {
-    expect(() => reduce((a, b) => a + ":" + b)([])).to.throw();
-  });
+Deno.test("basic", () => {
+  assertEquals(
+    reduce((a, b) => a + ":" + b)(["the", "quick", "brown", "fox"]),
+    "the:quick:brown:fox"
+  );
+});
+Deno.test("one element", () => {
+  assertEquals(reduce((a, b) => a + ":" + b)(["fox"]), "fox");
+});
+Deno.test("empty causes error", () => {
+  assertThrows(() => reduce((a, b) => a + ":" + b)([]));
 });

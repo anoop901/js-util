@@ -1,13 +1,12 @@
-import { expect } from "chai";
-import fold from "./fold";
+import { assertEquals } from "../deps.ts";
+import fold from "./fold.ts";
 
-describe("fold", () => {
-  it("basic", () => {
-    expect(fold(0, (acc, x: number) => acc + x)([5, 2, 9])).to.equal(16);
-  });
-  it("different accumulator type", () => {
-    expect(
-      fold(":", (acc, x: number) => acc + x.toString() + ":")([5, 2, 9])
-    ).to.equal(":5:2:9:");
-  });
+Deno.test("basic", () => {
+  assertEquals(fold(0, (acc, x: number) => acc + x)([5, 2, 9]), 16);
+});
+Deno.test("different accumulator type", () => {
+  assertEquals(
+    fold(":", (acc, x: number) => acc + x.toString() + ":")([5, 2, 9]),
+    ":5:2:9:"
+  );
 });

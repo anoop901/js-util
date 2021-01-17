@@ -1,22 +1,21 @@
-import { expect } from "chai";
-import chain from "../chain";
-import allIntegersStartingAt from "./allIntegersStartingAt";
-import takeWhile from "./takeWhile";
-import length from "./length";
+import chain from "../chain.ts";
+import { assertEquals } from "../deps.ts";
+import allIntegersStartingAt from "./allIntegersStartingAt.ts";
+import takeWhile from "./takeWhile.ts";
+import length from "./length.ts";
 
-describe("length", () => {
-  it("basic", () => {
-    expect(length([3, 5, 2])).to.equal(3);
-  });
-  it("empty", () => {
-    expect(length([])).to.equal(0);
-  });
-  it("from generator", () => {
-    expect(
-      chain(allIntegersStartingAt(0))
-        .then(takeWhile((x) => x < 4))
-        .then(length)
-        .end()
-    ).to.equal(4);
-  });
+Deno.test("basic", () => {
+  assertEquals(length([3, 5, 2]), 3);
+});
+Deno.test("empty", () => {
+  assertEquals(length([]), 0);
+});
+Deno.test("from generator", () => {
+  assertEquals(
+    chain(allIntegersStartingAt(0))
+      .then(takeWhile((x) => x < 4))
+      .then(length)
+      .end(),
+    4
+  );
 });

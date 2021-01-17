@@ -1,14 +1,12 @@
-import { expect } from "chai";
-import min from "./min";
+import { assertEquals, assertThrows } from "../deps.ts";
+import min from "./min.ts";
 
-describe("min", () => {
-  it("basic", () => {
-    expect(min([3, 1, 5, 8, 3])).to.equal(1);
-  });
-  it("one element", () => {
-    expect(min([5])).to.equal(5);
-  });
-  it("empty causes error", () => {
-    expect(() => min([])).to.throw();
-  });
+Deno.test("basic", () => {
+  assertEquals(min([3, 1, 5, 8, 3]), 1);
+});
+Deno.test("one element", () => {
+  assertEquals(min([5]), 5);
+});
+Deno.test("empty causes error", () => {
+  assertThrows(() => min([]));
 });

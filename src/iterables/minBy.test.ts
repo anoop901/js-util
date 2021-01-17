@@ -1,26 +1,25 @@
-import { expect } from "chai";
-import minBy from "./minBy";
+import { assertEquals, assertThrows } from "../deps.ts";
+import minBy from "./minBy.ts";
 
-describe("minBy", () => {
-  it("basic", () => {
-    expect(
-      minBy((x: string) => x.length)([
-        "the",
-        "quick",
-        "brown",
-        "fox",
-        "jumps",
-        "over",
-        "an",
-        "amazing",
-        "dog",
-      ])
-    ).to.equal("an");
-  });
-  it("one element", () => {
-    expect(minBy((x: string) => x.length)(["fox"])).to.equal("fox");
-  });
-  it("empty causes error", () => {
-    expect(() => minBy((x: string) => x.length)([])).to.throw();
-  });
+Deno.test("basic", () => {
+  assertEquals(
+    minBy((x: string) => x.length)([
+      "the",
+      "quick",
+      "brown",
+      "fox",
+      "jumps",
+      "over",
+      "an",
+      "amazing",
+      "dog",
+    ]),
+    "an"
+  );
+});
+Deno.test("one element", () => {
+  assertEquals(minBy((x: string) => x.length)(["fox"]), "fox");
+});
+Deno.test("empty causes error", () => {
+  assertThrows(() => minBy((x: string) => x.length)([]));
 });

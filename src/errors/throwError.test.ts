@@ -1,8 +1,6 @@
-import { expect } from "chai";
-import throwError from "./throwError";
+import { assertThrows } from "../deps.ts";
+import throwError from "./throwError.ts";
 
-describe("throwError", () => {
-  it("throws error", () => {
-    expect(() => throwError("foo")).to.throw("foo");
-  });
+Deno.test("throws error", () => {
+  assertThrows(() => throwError("foo"), Error, "foo");
 });

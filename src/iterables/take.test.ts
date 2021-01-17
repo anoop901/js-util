@@ -1,53 +1,57 @@
-import { expect } from "chai";
-import chain from "../chain";
-import allIntegersStartingAt from "./allIntegersStartingAt";
-import take from "./take";
-import toArray from "./toArray";
+import chain from "../chain.ts";
+import { assertEquals } from "../deps.ts";
+import allIntegersStartingAt from "./allIntegersStartingAt.ts";
+import take from "./take.ts";
+import toArray from "./toArray.ts";
 
-describe("take", () => {
-  it("basic", () => {
-    expect(
-      chain(["the", "quick", "brown", "fox", "jumped"])
-        .then(take(2))
-        .then(toArray)
-        .end()
-    ).to.deep.equal(["the", "quick"]);
-  });
-  it("take no elements", () => {
-    expect(
-      chain(["the", "quick", "brown", "fox", "jumped"])
-        .then(take(0))
-        .then(toArray)
-        .end()
-    ).to.deep.equal([]);
-  });
-  it("take one element", () => {
-    expect(
-      chain(["the", "quick", "brown", "fox", "jumped"])
-        .then(take(1))
-        .then(toArray)
-        .end()
-    ).to.deep.equal(["the"]);
-  });
-  it("take all elements", () => {
-    expect(
-      chain(["the", "quick", "brown", "fox", "jumped"])
-        .then(take(5))
-        .then(toArray)
-        .end()
-    ).to.deep.equal(["the", "quick", "brown", "fox", "jumped"]);
-  });
-  it("take more than all elements", () => {
-    expect(
-      chain(["the", "quick", "brown", "fox", "jumped"])
-        .then(take(7))
-        .then(toArray)
-        .end()
-    ).to.deep.equal(["the", "quick", "brown", "fox", "jumped"]);
-  });
-  it("infinite", () => {
-    expect(
-      chain(allIntegersStartingAt(0)).then(take(3)).then(toArray).end()
-    ).to.deep.equal([0, 1, 2]);
-  });
+Deno.test("basic", () => {
+  assertEquals(
+    chain(["the", "quick", "brown", "fox", "jumped"])
+      .then(take(2))
+      .then(toArray)
+      .end(),
+    ["the", "quick"]
+  );
+});
+Deno.test("take no elements", () => {
+  assertEquals(
+    chain(["the", "quick", "brown", "fox", "jumped"])
+      .then(take(0))
+      .then(toArray)
+      .end(),
+    []
+  );
+});
+Deno.test("take one element", () => {
+  assertEquals(
+    chain(["the", "quick", "brown", "fox", "jumped"])
+      .then(take(1))
+      .then(toArray)
+      .end(),
+    ["the"]
+  );
+});
+Deno.test("take all elements", () => {
+  assertEquals(
+    chain(["the", "quick", "brown", "fox", "jumped"])
+      .then(take(5))
+      .then(toArray)
+      .end(),
+    ["the", "quick", "brown", "fox", "jumped"]
+  );
+});
+Deno.test("take more than all elements", () => {
+  assertEquals(
+    chain(["the", "quick", "brown", "fox", "jumped"])
+      .then(take(7))
+      .then(toArray)
+      .end(),
+    ["the", "quick", "brown", "fox", "jumped"]
+  );
+});
+Deno.test("infinite", () => {
+  assertEquals(
+    chain(allIntegersStartingAt(0)).then(take(3)).then(toArray).end(),
+    [0, 1, 2]
+  );
 });

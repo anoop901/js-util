@@ -1,53 +1,51 @@
-import { expect } from "chai";
-import splitAt from "./splitAt";
+import { assertEquals } from "../deps.ts";
+import splitAt from "./splitAt.ts";
 
-describe("splitAt", () => {
-  it("complete before, then complete after", () => {
-    const { before, after } = splitAt(3)(
-      ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
-    );
-    expect(before.next()).to.deep.equal({ value: "the", done: false });
-    expect(before.next()).to.deep.equal({ value: "quick", done: false });
-    expect(before.next()).to.deep.equal({ value: "brown", done: false });
-    expect(before.next()).to.deep.equal({ value: undefined, done: true });
-    expect(after.next()).to.deep.equal({ value: "fox", done: false });
-    expect(after.next()).to.deep.equal({ value: "jumps", done: false });
-    expect(after.next()).to.deep.equal({ value: undefined, done: true });
-  });
-  it("complete after, then complete before", () => {
-    const { before, after } = splitAt(3)(
-      ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
-    );
-    expect(after.next()).to.deep.equal({ value: "fox", done: false });
-    expect(after.next()).to.deep.equal({ value: "jumps", done: false });
-    expect(after.next()).to.deep.equal({ value: undefined, done: true });
-    expect(before.next()).to.deep.equal({ value: "the", done: false });
-    expect(before.next()).to.deep.equal({ value: "quick", done: false });
-    expect(before.next()).to.deep.equal({ value: "brown", done: false });
-    expect(before.next()).to.deep.equal({ value: undefined, done: true });
-  });
-  it("interleave iterators, before first", () => {
-    const { before, after } = splitAt(3)(
-      ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
-    );
-    expect(before.next()).to.deep.equal({ value: "the", done: false });
-    expect(after.next()).to.deep.equal({ value: "fox", done: false });
-    expect(before.next()).to.deep.equal({ value: "quick", done: false });
-    expect(before.next()).to.deep.equal({ value: "brown", done: false });
-    expect(before.next()).to.deep.equal({ value: undefined, done: true });
-    expect(after.next()).to.deep.equal({ value: "jumps", done: false });
-    expect(after.next()).to.deep.equal({ value: undefined, done: true });
-  });
-  it("interleave iterators, after first", () => {
-    const { before, after } = splitAt(3)(
-      ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
-    );
-    expect(after.next()).to.deep.equal({ value: "fox", done: false });
-    expect(before.next()).to.deep.equal({ value: "the", done: false });
-    expect(before.next()).to.deep.equal({ value: "quick", done: false });
-    expect(after.next()).to.deep.equal({ value: "jumps", done: false });
-    expect(after.next()).to.deep.equal({ value: undefined, done: true });
-    expect(before.next()).to.deep.equal({ value: "brown", done: false });
-    expect(before.next()).to.deep.equal({ value: undefined, done: true });
-  });
+Deno.test("complete before, then complete after", () => {
+  const { before, after } = splitAt(3)(
+    ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
+  );
+  assertEquals(before.next(), { value: "the", done: false });
+  assertEquals(before.next(), { value: "quick", done: false });
+  assertEquals(before.next(), { value: "brown", done: false });
+  assertEquals(before.next(), { value: undefined, done: true });
+  assertEquals(after.next(), { value: "fox", done: false });
+  assertEquals(after.next(), { value: "jumps", done: false });
+  assertEquals(after.next(), { value: undefined, done: true });
+});
+Deno.test("complete after, then complete before", () => {
+  const { before, after } = splitAt(3)(
+    ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
+  );
+  assertEquals(after.next(), { value: "fox", done: false });
+  assertEquals(after.next(), { value: "jumps", done: false });
+  assertEquals(after.next(), { value: undefined, done: true });
+  assertEquals(before.next(), { value: "the", done: false });
+  assertEquals(before.next(), { value: "quick", done: false });
+  assertEquals(before.next(), { value: "brown", done: false });
+  assertEquals(before.next(), { value: undefined, done: true });
+});
+Deno.test("interleave iterators, before first", () => {
+  const { before, after } = splitAt(3)(
+    ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
+  );
+  assertEquals(before.next(), { value: "the", done: false });
+  assertEquals(after.next(), { value: "fox", done: false });
+  assertEquals(before.next(), { value: "quick", done: false });
+  assertEquals(before.next(), { value: "brown", done: false });
+  assertEquals(before.next(), { value: undefined, done: true });
+  assertEquals(after.next(), { value: "jumps", done: false });
+  assertEquals(after.next(), { value: undefined, done: true });
+});
+Deno.test("interleave iterators, after first", () => {
+  const { before, after } = splitAt(3)(
+    ["the", "quick", "brown", "fox", "jumps"][Symbol.iterator]()
+  );
+  assertEquals(after.next(), { value: "fox", done: false });
+  assertEquals(before.next(), { value: "the", done: false });
+  assertEquals(before.next(), { value: "quick", done: false });
+  assertEquals(after.next(), { value: "jumps", done: false });
+  assertEquals(after.next(), { value: undefined, done: true });
+  assertEquals(before.next(), { value: "brown", done: false });
+  assertEquals(before.next(), { value: undefined, done: true });
 });

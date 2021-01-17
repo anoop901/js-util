@@ -1,26 +1,25 @@
-import { expect } from "chai";
-import maxBy from "./maxBy";
+import { assertEquals, assertThrows } from "../deps.ts";
+import maxBy from "./maxBy.ts";
 
-describe("maxBy", () => {
-  it("basic", () => {
-    expect(
-      maxBy((x: string) => x.length)([
-        "the",
-        "quick",
-        "brown",
-        "fox",
-        "jumps",
-        "over",
-        "an",
-        "amazing",
-        "dog",
-      ])
-    ).to.equal("amazing");
-  });
-  it("one element", () => {
-    expect(maxBy((x: string) => x.length)(["fox"])).to.equal("fox");
-  });
-  it("empty causes error", () => {
-    expect(() => maxBy((x: string) => x.length)([])).to.throw();
-  });
+Deno.test("basic", () => {
+  assertEquals(
+    maxBy((x: string) => x.length)([
+      "the",
+      "quick",
+      "brown",
+      "fox",
+      "jumps",
+      "over",
+      "an",
+      "amazing",
+      "dog",
+    ]),
+    "amazing"
+  );
+});
+Deno.test("one element", () => {
+  assertEquals(maxBy((x: string) => x.length)(["fox"]), "fox");
+});
+Deno.test("empty causes error", () => {
+  assertThrows(() => maxBy((x: string) => x.length)([]));
 });

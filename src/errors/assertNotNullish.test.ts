@@ -1,14 +1,12 @@
-import { expect } from "chai";
-import assertNotNullish from "./assertNotNullish";
+import { assertThrows } from "../deps.ts";
+import assertNotNullish from "./assertNotNullish.ts";
 
-describe("assertNotNullish", () => {
-  it("null argument", () => {
-    expect(() => assertNotNullish(null)).to.throw();
-  });
-  it("undefined argument", () => {
-    expect(() => assertNotNullish(undefined)).to.throw();
-  });
-  it("number argument", () => {
-    expect(() => assertNotNullish(123)).to.not.throw();
-  });
+Deno.test("null argument", () => {
+  assertThrows(() => assertNotNullish(null));
+});
+Deno.test("undefined argument", () => {
+  assertThrows(() => assertNotNullish(undefined));
+});
+Deno.test("number argument", () => {
+  assertNotNullish(123); // This should not throw.
 });

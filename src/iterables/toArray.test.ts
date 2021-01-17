@@ -1,19 +1,18 @@
-import { expect } from "chai";
-import chain from "../chain";
-import allIntegersStartingAt from "./allIntegersStartingAt";
-import takeWhile from "./takeWhile";
-import toArray from "./toArray";
+import chain from "../chain.ts";
+import { assertEquals } from "../deps.ts";
+import allIntegersStartingAt from "./allIntegersStartingAt.ts";
+import takeWhile from "./takeWhile.ts";
+import toArray from "./toArray.ts";
 
-describe("toArray", () => {
-  it("basic", () => {
-    expect(toArray([3, 6, 5])).to.deep.equal([3, 6, 5]);
-  });
-  it("from generator", () => {
-    expect(
-      chain(allIntegersStartingAt(0))
-        .then(takeWhile((x) => x < 4))
-        .then(toArray)
-        .end()
-    ).to.deep.equal([0, 1, 2, 3]);
-  });
+Deno.test("basic", () => {
+  assertEquals(toArray([3, 6, 5]), [3, 6, 5]);
+});
+Deno.test("from generator", () => {
+  assertEquals(
+    chain(allIntegersStartingAt(0))
+      .then(takeWhile((x) => x < 4))
+      .then(toArray)
+      .end(),
+    [0, 1, 2, 3]
+  );
 });

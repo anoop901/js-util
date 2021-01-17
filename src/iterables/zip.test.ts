@@ -1,61 +1,57 @@
-import { expect } from "chai";
-import allIntegersStartingAt from "./allIntegersStartingAt";
-import zip from "./zip";
+import { assertEquals } from "../deps.ts";
+import allIntegersStartingAt from "./allIntegersStartingAt.ts";
+import zip from "./zip.ts";
 
-describe("zip", () => {
-  it("same size", () => {
-    expect(
-      Array.from(
-        zip([111, 22222, 33333, 444], ["the", "quick", "brown", "fox"])
-      )
-    ).to.deep.equal([
+Deno.test("same size", () => {
+  assertEquals(
+    Array.from(zip([111, 22222, 33333, 444], ["the", "quick", "brown", "fox"])),
+    [
       { first: 111, second: "the" },
       { first: 22222, second: "quick" },
       { first: 33333, second: "brown" },
       { first: 444, second: "fox" },
-    ]);
-  });
-  it("different sizes (bigger, smaller)", () => {
-    expect(
-      Array.from(
-        zip([111, 22222, 33333, 444, 5, 6], ["the", "quick", "brown", "fox"])
-      )
-    ).to.deep.equal([
+    ]
+  );
+});
+Deno.test("different sizes (bigger, smaller)", () => {
+  assertEquals(
+    Array.from(
+      zip([111, 22222, 33333, 444, 5, 6], ["the", "quick", "brown", "fox"])
+    ),
+    [
       { first: 111, second: "the" },
       { first: 22222, second: "quick" },
       { first: 33333, second: "brown" },
       { first: 444, second: "fox" },
-    ]);
-  });
-  it("different sizes (smaller, bigger)", () => {
-    expect(
-      Array.from(zip([111, 22222], ["the", "quick", "brown", "fox"]))
-    ).to.deep.equal([
+    ]
+  );
+});
+Deno.test("different sizes (smaller, bigger)", () => {
+  assertEquals(
+    Array.from(zip([111, 22222], ["the", "quick", "brown", "fox"])),
+    [
       { first: 111, second: "the" },
       { first: 22222, second: "quick" },
-    ]);
-  });
-  it("first empty", () => {
-    expect(Array.from(zip([], ["the", "quick", "brown", "fox"]))).to.deep.equal(
-      []
-    );
-  });
-  it("second empty", () => {
-    expect(Array.from(zip([1, 2, 3, 4], []))).to.deep.equal([]);
-  });
-  it("both empty", () => {
-    expect(Array.from(zip([], []))).to.deep.equal([]);
-  });
-  it("one infinite", () => {
-    expect(
-      Array.from(
-        zip(allIntegersStartingAt(0), ["the", "quick", "brown", "fox"])
-      )
-    ).to.deep.equal([
+    ]
+  );
+});
+Deno.test("first empty", () => {
+  assertEquals(Array.from(zip([], ["the", "quick", "brown", "fox"])), []);
+});
+Deno.test("second empty", () => {
+  assertEquals(Array.from(zip([1, 2, 3, 4], [])), []);
+});
+Deno.test("both empty", () => {
+  assertEquals(Array.from(zip([], [])), []);
+});
+Deno.test("one infinite", () => {
+  assertEquals(
+    Array.from(zip(allIntegersStartingAt(0), ["the", "quick", "brown", "fox"])),
+    [
       { first: 0, second: "the" },
       { first: 1, second: "quick" },
       { first: 2, second: "brown" },
       { first: 3, second: "fox" },
-    ]);
-  });
+    ]
+  );
 });

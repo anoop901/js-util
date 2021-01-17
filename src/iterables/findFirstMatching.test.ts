@@ -1,25 +1,28 @@
-import { expect } from "chai";
-import allIntegersStartingAt from "./allIntegersStartingAt";
-import findFirstMatching from "./findFirstMatching";
+import { assertEquals } from "../deps.ts";
+import allIntegersStartingAt from "./allIntegersStartingAt.ts";
+import findFirstMatching from "./findFirstMatching.ts";
 
-describe("findFirstMatching", () => {
-  it("basic", () => {
-    expect(
-      findFirstMatching((x: number) => x % 10 === 0)([6, 11, 50, 28, 80])
-    ).to.equal(50);
-  });
-  it("match at beginning", () => {
-    expect(
-      findFirstMatching((x: number) => x % 10 === 0)([40, 6, 11, 50, 28, 80])
-    ).to.equal(40);
-  });
-  it("no match", () => {
-    expect(findFirstMatching((x: number) => x % 10 === 0)([6, 11, 28])).to.be
-      .null;
-  });
-  it("infinite", () => {
-    expect(
-      findFirstMatching((x: number) => x % 10 === 0)(allIntegersStartingAt(123))
-    ).to.equal(130);
-  });
+Deno.test("basic", () => {
+  assertEquals(
+    findFirstMatching((x: number) => x % 10 === 0)([6, 11, 50, 28, 80]),
+    50
+  );
+});
+Deno.test("match at beginning", () => {
+  assertEquals(
+    findFirstMatching((x: number) => x % 10 === 0)([40, 6, 11, 50, 28, 80]),
+    40
+  );
+});
+Deno.test("no match", () => {
+  assertEquals(
+    findFirstMatching((x: number) => x % 10 === 0)([6, 11, 28]),
+    null
+  );
+});
+Deno.test("infinite", () => {
+  assertEquals(
+    findFirstMatching((x: number) => x % 10 === 0)(allIntegersStartingAt(123)),
+    130
+  );
 });

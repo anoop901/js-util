@@ -1,39 +1,41 @@
-import chain from "./chain";
-import { expect } from "chai";
+import chain from "./chain.ts";
+import { assertEquals } from "./deps.ts";
 
-describe("chain", () => {
-  it("single transformation", () => {
-    expect(
-      chain(5)
-        .then((x) => x * 2)
-        .end()
-    ).to.equal(10);
-  });
+Deno.test("single transformation", () => {
+  assertEquals(
+    chain(5)
+      .then((x) => x * 2)
+      .end(),
+    10
+  );
+});
 
-  it("multiple transformation", () => {
-    expect(
-      chain(5)
-        .then((x) => x * 2)
-        .then((x) => x + 8)
-        .then((x) => x * 10)
-        .end()
-    ).to.equal(180);
-  });
+Deno.test("multiple transformation", () => {
+  assertEquals(
+    chain(5)
+      .then((x) => x * 2)
+      .then((x) => x + 8)
+      .then((x) => x * 10)
+      .end(),
+    180
+  );
+});
 
-  it("transformation into different type", () => {
-    expect(
-      chain("hello")
-        .then((x) => x.length)
-        .end()
-    ).to.equal(5);
-  });
+Deno.test("transformation into different type", () => {
+  assertEquals(
+    chain("hello")
+      .then((x) => x.length)
+      .end(),
+    5
+  );
+});
 
-  it("multiple transformations into different types", () => {
-    expect(
-      chain("hello")
-        .then((x) => x.length)
-        .then((x) => `there are ${x} letters`)
-        .end()
-    ).to.equal("there are 5 letters");
-  });
+Deno.test("multiple transformations into different types", () => {
+  assertEquals(
+    chain("hello")
+      .then((x) => x.length)
+      .then((x) => `there are ${x} letters`)
+      .end(),
+    "there are 5 letters"
+  );
 });
