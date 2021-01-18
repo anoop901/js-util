@@ -31,9 +31,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-      - name: Get package version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
       - name: Generate documentation
         run: npm run docs
       - name: Publish documentation
@@ -42,4 +39,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: docs
-          TARGET_FOLDER: /${{ steps.package-version.outputs.current-version }}
+          TARGET_FOLDER: /

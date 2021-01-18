@@ -8,7 +8,7 @@
     "build": "tsc",
     "postbuild": "cp package.json dist",
     "test": "mocha",
-    "docs": "typedoc src/index.ts"
+    "docs": "typedoc --includeVersion src --exclude 'src/**/*.test.ts'"
   },
   "repository": {
     "type": "git",
