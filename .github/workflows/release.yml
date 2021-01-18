@@ -20,9 +20,7 @@ jobs:
       - name: Edit package version
         run: npx npe version ${{ github.event.release.tag_name }}
       - name: Build package
-        run: |
-          npm run build
-          cp package.json dist
+        run: npm run build
       - name: Publish package
         run: npm publish
         working-directory: ./dist
