@@ -1,6 +1,6 @@
 {
   "name": "@anoop901/js-util",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Convenience utilities for writing JS code.",
   "main": "index.js",
   "types": "index.d.ts",
