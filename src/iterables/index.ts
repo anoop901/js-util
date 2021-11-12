@@ -9,6 +9,7 @@ export { default as filterNonNullish } from "./filterNonNullish";
 export { default as findFirstMatching } from "./findFirstMatching";
 export { default as first } from "./first";
 export { default as fold } from "./fold";
+export { default as generate } from "./generate";
 export { default as itemAtIndex } from "./itemAtIndex";
 export { default as last } from "./last";
 export { default as length } from "./length";
